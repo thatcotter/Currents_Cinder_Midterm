@@ -2,6 +2,9 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 
+#include "OscSender.h"
+#include "OscListener.h"
+
 #include "Paddle.hpp"
 
 using namespace ci;
