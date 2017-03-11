@@ -27,6 +27,11 @@ void Paddle::setup(glm::vec2 position, float speed)
     this->speed = speed;
 }
 
+void updateOsc()
+{
+    
+}
+
 void Paddle::keyInput(ci::app::KeyEvent event)
 {
     if (event.getCode() == 273) {
@@ -40,4 +45,9 @@ void Paddle::draw()
 {
     ci::gl::color( 1.0, 1.0, 1.0 );
     ci::gl::drawSolidRect( ci::Rectf( this->pos.x - 5, this->pos.y - 50, this->pos.x + 5, this->pos.y + 50 ) );
+}
+
+glm::vec2 Paddle::getPos()
+{
+    return this->pos;
 }

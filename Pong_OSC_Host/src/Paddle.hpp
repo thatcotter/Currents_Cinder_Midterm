@@ -5,6 +5,7 @@
 //  Created by Andrew Cotter on 3/11/17.
 //
 //
+#include "OscListener.h"
 
 #ifndef Paddle_hpp
 #define Paddle_hpp
@@ -18,9 +19,12 @@ class Paddle
 public:
     static PaddleRef create ( glm::vec2 position, float speed );
     
-    void update();
+    void update( );
+    void updateOsc();
     void draw();
     void keyInput( ci::app::KeyEvent event );
+    
+    glm::vec2 getPos();
     
 private:
     Paddle();
