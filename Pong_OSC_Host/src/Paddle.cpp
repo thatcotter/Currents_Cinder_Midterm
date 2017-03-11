@@ -29,7 +29,7 @@ void Paddle::setup(glm::vec2 position, float speed)
 
 void Paddle::updateOsc( ci::osc::Message message )
 {
-    this->pos += this->speed;
+    this->pos.y = message.getArgAsFloat(1);
 }
 
 void Paddle::keyInput(ci::app::KeyEvent event)
