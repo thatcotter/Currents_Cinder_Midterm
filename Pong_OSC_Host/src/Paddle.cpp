@@ -29,14 +29,15 @@ void Paddle::setup(glm::vec2 position, float speed)
 
 void Paddle::keyInput(ci::app::KeyEvent event)
 {
-    if (event.KEY_DOWN) {
+    if (event.getCode() == 273) {
         this->pos.y -= this->speed;
-    }else if (event.KEY_UP) {
+    }else if (event.getCode() == 274) {
         this->pos.y += this->speed;
     }
 }
 
 void Paddle::draw()
 {
+    ci::gl::color( 1.0, 1.0, 1.0 );
     ci::gl::drawSolidRect( ci::Rectf( this->pos.x - 5, this->pos.y - 50, this->pos.x + 5, this->pos.y + 50 ) );
 }
