@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/kimkohler/Desktop/cinder_0.9.0_mac/projects/Pong_OSC_Host/blocks/OSC/src/OscListener.cpp \
+  /Users/andrewcotter/Documents/Code/cinder_0.9.0_mac/Currents_Cinder_Midterm/Pong_OSC_Host/blocks/OSC/src/OscListener.cpp \
   ../../../include/cinder/Utilities.h \
   ../../../include/boost/lexical_cast.hpp \
   ../../../include/boost/range/iterator_range_core.hpp \
