@@ -22,6 +22,8 @@ class Pong_OSC_HostApp : public App {
 	void update() override;
 	void draw() override;
     
+    osc::Listener listener;
+    
     PaddleRef myPaddle;
     PaddleRef theirPaddle;
     shared_ptr<Puck> _Puck;
@@ -31,6 +33,8 @@ void Pong_OSC_HostApp::setup()
 {
     setWindowSize( 500, 500 );
     _Puck = make_shared<Puck>();
+    
+    listener.setup( 8888 );
     myPaddle = Paddle::create( glm::vec2( 50, getWindowHeight()/2), 10 );
     theirPaddle = Paddle::create( glm::vec2( getWindowWidth()- 50, getWindowHeight()/2 ), 10 );
 }
@@ -47,6 +51,16 @@ void Pong_OSC_HostApp::keyDown(cinder::app::KeyEvent event)
 void Pong_OSC_HostApp::update()
 {
     _Puck->update();
+    while ( listener.hasWaitingMessages() )
+    {
+        osc::Message message;
+        listener.getNextMessage( &message );
+        for (int i = 0; i < message.getNumArgs(); i++)
+        {
+            <#statements#>
+        }
+    }
+    
 }
 
 void Pong_OSC_HostApp::draw()
