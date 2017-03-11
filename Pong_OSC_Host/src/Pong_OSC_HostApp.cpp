@@ -60,6 +60,18 @@ void Pong_OSC_HostApp::keyDown(cinder::app::KeyEvent event)
 
 void Pong_OSC_HostApp::update()
 {
+    
+    glm::vec2 dist1 = (*_Puck).mLoc - myPaddle->getPos();
+    float dist1F = glm::length(dist1);
+    console() << dist1F << endl;
+    if(dist1F <= (*_Puck).r + 5){
+        (*_Puck).collision(1);
+    }
+    glm::vec2 dist2 = theirPaddle->getPos() - (*_Puck).mLoc;
+    float dist2F = glm::length(dist2);
+    if(dist2F <= (*_Puck).r + 5){
+        (*_Puck).collision(2);
+    }
     _Puck->update();
     
     //Update their paddle via osc
