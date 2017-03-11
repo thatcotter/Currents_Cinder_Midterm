@@ -59,7 +59,7 @@
 		4A135954A262415D8C71BC28 /* OscHostEndianness.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OscHostEndianness.h; path = ../blocks/OSC/src/osc/OscHostEndianness.h; sourceTree = "<group>"; };
 		4F4EED01853D4B9B9C453885 /* OscListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OscListener.h; path = ../blocks/OSC/src/OscListener.h; sourceTree = "<group>"; };
 		50F3547F1E748E6A00CCD133 /* Puck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Puck.cpp; path = ../src/Puck.cpp; sourceTree = "<group>"; };
-		50F354801E748E6A00CCD133 /* Puck.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Puck.hpp; path = ../src/Puck.hpp; sourceTree = "<group>"; };
+		50F354801E748E6A00CCD133 /* Puck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Puck.h; path = ../src/Puck.h; sourceTree = "<group>"; };
 		50F354821E748E7600CCD133 /* Paddle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Paddle.cpp; path = ../src/Paddle.cpp; sourceTree = "<group>"; };
 		50F354831E748E7600CCD133 /* Paddle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Paddle.hpp; path = ../src/Paddle.hpp; sourceTree = "<group>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
@@ -125,7 +125,7 @@
 			children = (
 				6FDE7847713243C49B277B22 /* Pong_OSC_HostApp.cpp */,
 				50F3547F1E748E6A00CCD133 /* Puck.cpp */,
-				50F354801E748E6A00CCD133 /* Puck.hpp */,
+				50F354801E748E6A00CCD133 /* Puck.h */,
 				50F354821E748E7600CCD133 /* Paddle.cpp */,
 				50F354831E748E7600CCD133 /* Paddle.hpp */,
 			);
