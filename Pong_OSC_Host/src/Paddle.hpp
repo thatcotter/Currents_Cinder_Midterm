@@ -9,6 +9,26 @@
 #ifndef Paddle_hpp
 #define Paddle_hpp
 
-#include <stdio.h>
+class Paddle;
+
+typedef std::shared_ptr<Paddle> PaddleRef;
+
+class Paddle
+{
+public:
+    static PaddleRef create ( glm::vec2 position, float speed );
+    
+    void update();
+    void draw();
+    void keyInput( ci::app::KeyEvent event );
+    
+private:
+    Paddle();
+    void setup( glm::vec2 position, float speed );
+    glm::vec2 pos;
+    float speed;
+    
+    
+};
 
 #endif /* Paddle_hpp */
