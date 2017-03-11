@@ -25,7 +25,9 @@ class Pong_OSC_HostApp : public App {
 
 void Pong_OSC_HostApp::setup()
 {
+    setWindowSize( 500, 500 );
     myPaddle = Paddle::create( glm::vec2( 50, getWindowHeight()/2), 10 );
+    theirPaddle = Paddle::create( glm::vec2( getWindowWidth()- 50, getWindowHeight()/2 ), 10 );
 }
 
 void Pong_OSC_HostApp::mouseDown( MouseEvent event )
@@ -45,6 +47,7 @@ void Pong_OSC_HostApp::draw()
 {
 	gl::clear( Color( 0, 0, 0 ) );
     myPaddle->draw();
+    theirPaddle->draw();
 }
 
 CINDER_APP( Pong_OSC_HostApp, RendererGl )
