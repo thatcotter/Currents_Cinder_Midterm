@@ -19,8 +19,8 @@ class Paddle
 public:
     static PaddleRef create ( glm::vec2 position, float speed );
     
-    void update( );
-    void updateOsc();
+    void update();
+    void updateOsc( ci::osc::Message message );
     void draw();
     void keyInput( ci::app::KeyEvent event );
     
