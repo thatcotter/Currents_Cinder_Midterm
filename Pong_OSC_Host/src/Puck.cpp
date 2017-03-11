@@ -6,8 +6,9 @@ Puck::Puck()
     mLoc = glm::vec2(cinder::app::getWindowWidth()/2, cinder::app::getWindowHeight()/2);
     mVel = glm::vec2(0, 0);
     //Start with a random speed between -5 and 5
-    mAcc = glm::vec2(cinder::Rand::randFloat(10.f)-5.f, cinder::Rand::randFloat(10.f)-5.f);
-    
+    //mAcc = glm::vec2(cinder::Rand::randFloat(10.f)-5.f, cinder::Rand::randFloat(10.f)-5.f);
+    mAcc = glm::vec2(-1.f, 2.5f);
+    r = 15;
 }
 
 Puck::~Puck()
@@ -17,6 +18,7 @@ Puck::~Puck()
 
 void Puck::update()
 {
+    wallBall();
     mVel += mAcc;
     mLoc += mVel;
     
@@ -30,7 +32,23 @@ void Puck::draw()
     mAcc *= 0;
 }
 
-void Puck::collision()
+void Puck::wallBall()
 {
+    if (mLoc.y <= 0){
+        mAcc.y = 1;
+    } else if (mLoc.y >= cinder::app::getWindowHeight()){
+        mAcc.y = -1;
+    }
     
+}
+
+void Puck::collision(float side)
+{
+    //mAcc.x = 0;
+    if (side == 1){
+        mAcc.x -= -1;
+    }
+    if (side == 2){
+        mAcc.x -= 1;
+    }
 }
