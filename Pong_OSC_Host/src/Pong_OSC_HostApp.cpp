@@ -57,7 +57,10 @@ void Pong_OSC_HostApp::update()
         listener.getNextMessage( &message );
         for (int i = 0; i < message.getNumArgs(); i++)
         {
-            <#statements#>
+            console() << message.getArgType(i) << endl;
+            if (message.getArgType(i) == osc::TYPE_STRING) {
+                theirPaddle->updateOsc(message);
+            }
         }
     }
     
