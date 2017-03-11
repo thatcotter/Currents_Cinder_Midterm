@@ -37,6 +37,7 @@ void Pong_OSC_HostApp::setup()
     _Puck = make_shared<Puck>();
     
     listener.setup( 8888 );
+    
     std::string host = ci::System::getIpAddress();
     // assume the broadcast address is this machine's IP address but with 255 as the final value
     // so to multicast from IP 192.168.1.100, the host should be 192.168.1.255
@@ -85,7 +86,23 @@ void Pong_OSC_HostApp::update()
         }
     }
     
+    osc::Message message1;
+//    message1.setAddress("/paddlePos");
+    message1.addStringArg("/paddlePos");
+    message1.addFloatArg(myPaddle->getPos().y);
+    sender.sendMessage(message1);
+    console() << message1.getArgAsString(0) << endl;
+    console() << message1.getArgAsFloat(1) << endl;
     
+    osc::Message message2;
+//    message2.setAddress("/puckPos");
+    message2.addStringArg("/puckPos");
+    message2.addFloatArg(_Puck->mLoc.x);
+    message2.addFloatArg(_Puck->mLoc.y);
+    sender.sendMessage(message2);
+    console() << message2.getArgAsString(0) << endl;
+    console() << message2.getArgAsFloat(1) << endl;
+    console() << message2.getArgAsFloat(2) << endl;
     
 }
 
