@@ -21,6 +21,7 @@ public:
     void draw();
     void wallBall();
     void collision(float side);
+    void restart();
     
     
 private:
