@@ -64,12 +64,12 @@ void Pong_OSC_GuestApp::update()
     {
         osc::Message message;
         listener.getNextMessage( &message );
-        cout << "New Message!" << endl;
+//        cout << "New Message!" << endl;
         
         if (message.getArgAsString(0) == "/paddlePos") {
             //set other paddle position
             theirPaddle->updateOsc(message);
-            cout << "New Paddle Message!" << endl;
+//            cout << "New Paddle Message!" << endl;
         }
         
         if (message.getArgAsString(0) == "/puckPos") {
@@ -78,6 +78,14 @@ void Pong_OSC_GuestApp::update()
             _Puck->mLoc.y = message.getArgAsFloat(2);
         }
     }
+    
+    osc::Message message1;
+    //    message1.setAddress("/paddlePos");
+    message1.addStringArg("/paddlePos");
+    message1.addFloatArg(myPaddle->getPos().y);
+    sender.sendMessage(message1);
+    //    console() << message1.getArgAsString(0) << endl;
+    //    console() << message1.getArgAsFloat(1) << endl;
 }
 
 void Pong_OSC_GuestApp::draw()
