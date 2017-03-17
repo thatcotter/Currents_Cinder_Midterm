@@ -1,6 +1,7 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "cinder/System.h"
 
 #include "OscSender.h"
 #include "OscListener.h"
@@ -35,7 +36,14 @@ void Pong_OSC_GuestApp::setup()
     setWindowSize( 500, 500 );
     _Puck = make_shared<Puck>();
     
-    listener.setup( 7777 ); //change later
+    listener.setup( 7777 );
+    std::string host = ci::System::getIpAddress();
+    // assume the broadcast address is this machine's IP address but with 255 as the final value
+    // so to multicast from IP 192.168.1.100, the host should be 192.168.1.255
+    if( host.rfind( '.' ) != string::npos )
+        host.replace( host.rfind( '.' ) + 1, 3, "255" );
+    console() << host << endl;
+    sender.setup( host, 8888 );
     
     theirPaddle = Paddle::create( glm::vec2( 50, getWindowHeight()/2), 10 );
     myPaddle = Paddle::create( glm::vec2( getWindowWidth()- 50, getWindowHeight()/2 ), 10 );
@@ -56,6 +64,7 @@ void Pong_OSC_GuestApp::update()
     {
         osc::Message message;
         listener.getNextMessage( &message );
+        cout << "New Message!" << endl;
         
         if (message.getArgAsString(0) == "/paddlePos") {
             //set other paddle position

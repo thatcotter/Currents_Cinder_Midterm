@@ -44,7 +44,7 @@ void Pong_OSC_HostApp::setup()
     if( host.rfind( '.' ) != string::npos )
         host.replace( host.rfind( '.' ) + 1, 3, "255" );
     console() << host << endl;
-    sender.setup( host, 8888 );
+    sender.setup( host, 7777, true );
     
     myPaddle = Paddle::create( glm::vec2( 50, getWindowHeight()/2), 10 );
     theirPaddle = Paddle::create( glm::vec2( getWindowWidth()- 50, getWindowHeight()/2 ), 10 );
@@ -64,7 +64,7 @@ void Pong_OSC_HostApp::update()
     
     glm::vec2 dist1 = (*_Puck).mLoc - myPaddle->getPos();
     float dist1F = glm::length(dist1);
-    console() << dist1F << endl;
+//    console() << dist1F << endl;
     if(dist1F <= (*_Puck).r + 5){
         (*_Puck).collision(1);
     }
@@ -91,8 +91,8 @@ void Pong_OSC_HostApp::update()
     message1.addStringArg("/paddlePos");
     message1.addFloatArg(myPaddle->getPos().y);
     sender.sendMessage(message1);
-    console() << message1.getArgAsString(0) << endl;
-    console() << message1.getArgAsFloat(1) << endl;
+//    console() << message1.getArgAsString(0) << endl;
+//    console() << message1.getArgAsFloat(1) << endl;
     
     osc::Message message2;
 //    message2.setAddress("/puckPos");
@@ -100,9 +100,9 @@ void Pong_OSC_HostApp::update()
     message2.addFloatArg(_Puck->mLoc.x);
     message2.addFloatArg(_Puck->mLoc.y);
     sender.sendMessage(message2);
-    console() << message2.getArgAsString(0) << endl;
-    console() << message2.getArgAsFloat(1) << endl;
-    console() << message2.getArgAsFloat(2) << endl;
+//    console() << message2.getArgAsString(0) << endl;
+//    console() << message2.getArgAsFloat(1) << endl;
+//    console() << message2.getArgAsFloat(2) << endl;
     
 }
 
