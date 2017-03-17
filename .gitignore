@@ -26,3 +26,23 @@ Pong_OSC_Guest/xcode/build/Pong_OSC_Guest.build/Debug/Pong_OSC_Guest.build/dgph
 Pong_OSC_Host/xcode/build/Pong_OSC_Host.build/Debug/Pong_OSC_Host.build/dgph
 
 *.xcuserstate
+
+*.data
+
+*.dat
+
+*.pch
+
+Pong_OSC_Guest/xcode/build/Pong_OSC_Guest.build/Debug/Pong_OSC_Guest.build/dgph
+
+Pong_OSC_Host/xcode/build/Pong_OSC_Host.build/Debug/Pong_OSC_Host.build/dgph
+
+Pong_OSC_Guest/xcode/build/Pong_OSC_Guest.build/Debug/Pong_OSC_Guest.build/dgph
+
+Pong_OSC_Guest/xcode/build/Pong_OSC_Guest.build/Debug/Pong_OSC_Guest.build/dgph~
+
+*.hmap
+
+*.hmap
+
+*.LinkFileList
