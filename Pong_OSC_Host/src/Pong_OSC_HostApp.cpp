@@ -81,6 +81,8 @@ void Pong_OSC_HostApp::update()
         osc::Message message;
         listener.getNextMessage( &message );
         
+        
+        
         if (message.getArgAsString(0) == "/paddlePos") {
             theirPaddle->updateOsc(message);
         }

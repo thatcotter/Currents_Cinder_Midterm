@@ -43,7 +43,7 @@ void Pong_OSC_GuestApp::setup()
     if( host.rfind( '.' ) != string::npos )
         host.replace( host.rfind( '.' ) + 1, 3, "255" );
     console() << host << endl;
-    sender.setup( host, 8888 );
+    sender.setup( host, 8888, true );
     
     theirPaddle = Paddle::create( glm::vec2( 50, getWindowHeight()/2), 10 );
     myPaddle = Paddle::create( glm::vec2( getWindowWidth()- 50, getWindowHeight()/2 ), 10 );
@@ -84,8 +84,8 @@ void Pong_OSC_GuestApp::update()
     message1.addStringArg("/paddlePos");
     message1.addFloatArg(myPaddle->getPos().y);
     sender.sendMessage(message1);
-    //    console() << message1.getArgAsString(0) << endl;
-    //    console() << message1.getArgAsFloat(1) << endl;
+        console() << message1.getArgAsString(0) << endl;
+        console() << message1.getArgAsFloat(1) << endl;
 }
 
 void Pong_OSC_GuestApp::draw()
