@@ -40,7 +40,10 @@ void Paddle::keyInput(ci::app::KeyEvent event)
         this->pos.y += this->speed;
     }
 }
-
+void Paddle::mouseMove(ci::app::MouseEvent event )
+{
+    this->pos.y = event.getY();
+}
 void Paddle::draw()
 {
     ci::gl::color( 1.0, 1.0, 1.0 );

@@ -20,6 +20,7 @@ class Pong_OSC_HostApp : public App {
 	void setup() override;
 	void mouseDown( MouseEvent event ) override;
     void keyDown(KeyEvent event ) override;
+    void mouseMove( MouseEvent event ) override;
 	void update() override;
 	void draw() override;
     
@@ -54,6 +55,11 @@ void Pong_OSC_HostApp::mouseDown( MouseEvent event )
 {
 }
 
+void Pong_OSC_HostApp::mouseMove(cinder::app::MouseEvent event)
+{
+    myPaddle->mouseMove(event);
+}
+
 void Pong_OSC_HostApp::keyDown(cinder::app::KeyEvent event)
 {
     myPaddle->keyInput( event );
@@ -61,6 +67,7 @@ void Pong_OSC_HostApp::keyDown(cinder::app::KeyEvent event)
 
 void Pong_OSC_HostApp::update()
 {
+    
     
     glm::vec2 dist1 = (*_Puck).mLoc - myPaddle->getPos();
     float dist1F = glm::length(dist1);
@@ -80,6 +87,7 @@ void Pong_OSC_HostApp::update()
     {
         osc::Message message;
         listener.getNextMessage( &message );
+        
         
         
         

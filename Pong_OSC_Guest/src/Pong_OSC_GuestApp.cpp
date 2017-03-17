@@ -20,6 +20,7 @@ class Pong_OSC_GuestApp : public App {
 	void setup() override;
 	void mouseDown( MouseEvent event ) override;
     void keyDown(ci::app::KeyEvent event) override;
+    void mouseMove( ci::app::MouseEvent event) override;
 	void update() override;
 	void draw() override;
     
@@ -53,6 +54,11 @@ void Pong_OSC_GuestApp::mouseDown( MouseEvent event )
 {
 }
 
+void Pong_OSC_GuestApp::mouseMove(ci::app::MouseEvent event)
+{
+    myPaddle->mouseMove( event );
+}
+
 void Pong_OSC_GuestApp::keyDown(ci::app::KeyEvent event)
 {
     myPaddle->keyInput( event );
@@ -84,8 +90,8 @@ void Pong_OSC_GuestApp::update()
     message1.addStringArg("/paddlePos");
     message1.addFloatArg(myPaddle->getPos().y);
     sender.sendMessage(message1);
-        console() << message1.getArgAsString(0) << endl;
-        console() << message1.getArgAsFloat(1) << endl;
+//    console() << message1.getArgAsString(0) << endl;
+//    console() << message1.getArgAsFloat(1) << endl;
 }
 
 void Pong_OSC_GuestApp::draw()

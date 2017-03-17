@@ -27,10 +27,15 @@ void Paddle::setup(glm::vec2 position, float speed)
     this->speed = speed;
 }
 
+void Paddle::update()
+{
+}
+
 void Paddle::updateOsc( ci::osc::Message message )
 {
     this->pos.y = message.getArgAsFloat(1);
 }
+
 
 void Paddle::keyInput(ci::app::KeyEvent event)
 {
@@ -39,6 +44,11 @@ void Paddle::keyInput(ci::app::KeyEvent event)
     }else if (event.getCode() == 274) {
         this->pos.y += this->speed;
     }
+}
+
+void Paddle::mouseMove(ci::app::MouseEvent event )
+{
+    this->pos.y = event.getY();
 }
 
 void Paddle::draw()

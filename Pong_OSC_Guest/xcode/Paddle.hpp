@@ -23,6 +23,8 @@ public:
     void updateOsc( ci::osc::Message message );
     void draw();
     void keyInput( ci::app::KeyEvent event );
+    void mouseMove( ci::app::MouseEvent event );
+
     
     glm::vec2 getPos();
     
