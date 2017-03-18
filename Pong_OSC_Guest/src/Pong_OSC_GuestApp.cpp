@@ -86,11 +86,9 @@ void Pong_OSC_GuestApp::update()
             _Puck->mLoc.y = message.getArgAsFloat(2);
         }
         
-        if (message.getArgAsString(0) == "/score1") {
+        if (message.getArgAsString(0) == "/score") {
             score1 = message.getArgAsFloat(1);
-        }
-        if (message.getArgAsString(0) == "/score2") {
-            score2 = message.getArgAsFloat(1);
+            score2 = message.getArgAsFloat(2);
         }
     }
     
@@ -111,8 +109,8 @@ void Pong_OSC_GuestApp::draw()
     myPaddle->draw();
     theirPaddle->draw();
     
-    ci::gl::drawString(std::to_string(score2), glm::vec2(20.f, 50.f));
-    ci::gl::drawString(std::to_string(score1), glm::vec2(ci::app::getWindowWidth()-20.f, 50.f));
+    ci::gl::drawString(std::to_string(int(score2)), glm::vec2(20.f, 50.f));
+    ci::gl::drawString(std::to_string(int(score1)), glm::vec2(ci::app::getWindowWidth()-20.f, 50.f));
     
     
 }
