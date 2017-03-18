@@ -23,7 +23,8 @@ class Pong_OSC_GuestApp : public App {
     void mouseMove( ci::app::MouseEvent event) override;
 	void update() override;
 	void draw() override;
-    
+    int score1 = 0;
+    int score2 = 0;
     osc::Listener listener;
     osc::Sender sender;
     
@@ -41,9 +42,10 @@ void Pong_OSC_GuestApp::setup()
     std::string host = ci::System::getIpAddress();
     // assume the broadcast address is this machine's IP address but with 255 as the final value
     // so to multicast from IP 192.168.1.100, the host should be 192.168.1.255
-    if( host.rfind( '.' ) != string::npos )
-        host.replace( host.rfind( '.' ) + 1, 3, "255" );
+    //if( host.rfind( '.' ) != string::npos )
+       // host.replace( host.rfind( '.' ) + 1, 3, "255" );
     console() << host << endl;
+    host = "149.31.145.76";
     sender.setup( host, 8888, true );
     
     theirPaddle = Paddle::create( glm::vec2( 50, getWindowHeight()/2), 10 );
@@ -83,6 +85,13 @@ void Pong_OSC_GuestApp::update()
             _Puck->mLoc.x = message.getArgAsFloat(1);
             _Puck->mLoc.y = message.getArgAsFloat(2);
         }
+        
+        if (message.getArgAsString(0) == "/score1") {
+            score1 = message.getArgAsFloat(1);
+        }
+        if (message.getArgAsString(0) == "/score2") {
+            score2 = message.getArgAsFloat(1);
+        }
     }
     
     osc::Message message1;
@@ -101,6 +110,11 @@ void Pong_OSC_GuestApp::draw()
     _Puck->draw();
     myPaddle->draw();
     theirPaddle->draw();
+    
+    ci::gl::drawString(std::to_string(score2), glm::vec2(20.f, 50.f));
+    ci::gl::drawString(std::to_string(score1), glm::vec2(ci::app::getWindowWidth()-20.f, 50.f));
+    
+    
 }
 
 CINDER_APP( Pong_OSC_GuestApp, RendererGl )

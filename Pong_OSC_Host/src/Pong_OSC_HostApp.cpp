@@ -30,6 +30,9 @@ class Pong_OSC_HostApp : public App {
     PaddleRef myPaddle;
     PaddleRef theirPaddle;
     shared_ptr<Puck> _Puck;
+    
+    int score1 = 0;
+    int score2 = 0;
 };
 
 void Pong_OSC_HostApp::setup()
@@ -110,6 +113,16 @@ void Pong_OSC_HostApp::update()
     message2.addFloatArg(_Puck->mLoc.x);
     message2.addFloatArg(_Puck->mLoc.y);
     sender.sendMessage(message2);
+    
+    osc::Message message3;
+    message3.addStringArg("/score1");
+    message3.addIntArg(score1);
+    sender.sendMessage(message3);
+    
+    osc::Message message4;
+    message3.addStringArg("/score2");
+    message3.addIntArg(score2);
+    sender.sendMessage(message4);
 //    console() << message2.getArgAsString(0) << endl;
 //    console() << message2.getArgAsFloat(1) << endl;
 //    console() << message2.getArgAsFloat(2) << endl;
@@ -122,6 +135,16 @@ void Pong_OSC_HostApp::draw()
     _Puck->draw();
     myPaddle->draw();
     theirPaddle->draw();
+    
+    if (_Puck->mLoc.x < 0-_Puck->r){
+        score1 ++;
+        
+    } else if (_Puck->mLoc.x > cinder::app::getWindowWidth()+_Puck->r){
+        score2 ++;
+    }
+    ci::gl::drawString(std::to_string(score2), glm::vec2(20.f, 50.f));
+    ci::gl::drawString(std::to_string(score1), glm::vec2(ci::app::getWindowWidth()-20.f, 50.f));
+    
 }
 
 CINDER_APP( Pong_OSC_HostApp, RendererGl )
