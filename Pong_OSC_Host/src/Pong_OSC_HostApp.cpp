@@ -31,8 +31,8 @@ class Pong_OSC_HostApp : public App {
     PaddleRef theirPaddle;
     shared_ptr<Puck> _Puck;
     
-    int score1 = 0;
-    int score2 = 0;
+    float score1;
+    float score2;
 };
 
 void Pong_OSC_HostApp::setup()
@@ -48,10 +48,17 @@ void Pong_OSC_HostApp::setup()
     if( host.rfind( '.' ) != string::npos )
         host.replace( host.rfind( '.' ) + 1, 3, "255" );
     console() << host << endl;
+    
+    //override ip
+//    host = "149.31.131.125";
+    
     sender.setup( host, 7777, true );
     
     myPaddle = Paddle::create( glm::vec2( 50, getWindowHeight()/2), 10 );
     theirPaddle = Paddle::create( glm::vec2( getWindowWidth()- 50, getWindowHeight()/2 ), 10 );
+    
+    score1 = 0.f;
+    score2 = 0.f;
 }
 
 void Pong_OSC_HostApp::mouseDown( MouseEvent event )
@@ -90,18 +97,17 @@ void Pong_OSC_HostApp::update()
     {
         osc::Message message;
         listener.getNextMessage( &message );
+        cout << "New Message!" << endl;
         
-        
-        
-        
-        if (message.getArgAsString(0) == "/paddlePos") {
+        if (message.getArgAsString(0) == "/player/position") {
             theirPaddle->updateOsc(message);
         }
     }
     
     osc::Message message1;
 //    message1.setAddress("/paddlePos");
-    message1.addStringArg("/paddlePos");
+    message1.addStringArg("/player/position");
+//    message1.addFloatArg(myPaddle->getPos().x);
     message1.addFloatArg(myPaddle->getPos().y);
     sender.sendMessage(message1);
 //    console() << message1.getArgAsString(0) << endl;
@@ -109,20 +115,26 @@ void Pong_OSC_HostApp::update()
     
     osc::Message message2;
 //    message2.setAddress("/puckPos");
-    message2.addStringArg("/puckPos");
+    message2.addStringArg("/ball/position");
     message2.addFloatArg(_Puck->mLoc.x);
     message2.addFloatArg(_Puck->mLoc.y);
     sender.sendMessage(message2);
     
     osc::Message message3;
-    message3.addStringArg("/score1");
-    message3.addIntArg(score1);
+    message3.addStringArg("/score");
+    message3.addFloatArg(score1);
+    message3.addFloatArg(score2);
     sender.sendMessage(message3);
+//    cout << message3.getArgAsFloat(1) << endl;
+//    cout << message3.getArgAsFloat(2) << endl;
     
-    osc::Message message4;
-    message3.addStringArg("/score2");
-    message3.addIntArg(score2);
-    sender.sendMessage(message4);
+    
+    
+//    osc::Message message4;
+//    message3.addStringArg("/score2");
+//    message3.addFloatArg(score2);
+//    sender.sendMessage(message4);
+//    cout << message4.getArgAsFloat(1) << endl;
 //    console() << message2.getArgAsString(0) << endl;
 //    console() << message2.getArgAsFloat(1) << endl;
 //    console() << message2.getArgAsFloat(2) << endl;
@@ -142,8 +154,8 @@ void Pong_OSC_HostApp::draw()
     } else if (_Puck->mLoc.x > cinder::app::getWindowWidth()+_Puck->r){
         score2 ++;
     }
-    ci::gl::drawString(std::to_string(score2), glm::vec2(20.f, 50.f));
-    ci::gl::drawString(std::to_string(score1), glm::vec2(ci::app::getWindowWidth()-20.f, 50.f));
+    ci::gl::drawString(std::to_string(int(score2)), glm::vec2(20.f, 50.f));
+    ci::gl::drawString(std::to_string(int(score1)), glm::vec2(ci::app::getWindowWidth()-20.f, 50.f));
     
 }
 

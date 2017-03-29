@@ -42,10 +42,14 @@ void Pong_OSC_GuestApp::setup()
     std::string host = ci::System::getIpAddress();
     // assume the broadcast address is this machine's IP address but with 255 as the final value
     // so to multicast from IP 192.168.1.100, the host should be 192.168.1.255
-    //if( host.rfind( '.' ) != string::npos )
-       // host.replace( host.rfind( '.' ) + 1, 3, "255" );
+    if( host.rfind( '.' ) != string::npos )
+        host.replace( host.rfind( '.' ) + 1, 3, "255" );
     console() << host << endl;
-    host = "149.31.145.76";
+    
+    //override
+//    host = "149.31.131.125";
+    
+    
     sender.setup( host, 8888, true );
     
     theirPaddle = Paddle::create( glm::vec2( 50, getWindowHeight()/2), 10 );
@@ -72,15 +76,16 @@ void Pong_OSC_GuestApp::update()
     {
         osc::Message message;
         listener.getNextMessage( &message );
-//        cout << "New Message!" << endl;
+        cout << "New Message!" << endl;
         
-        if (message.getArgAsString(0) == "/paddlePos") {
+        
+        if (message.getArgAsString(0) == "/player/position") {
             //set other paddle position
             theirPaddle->updateOsc(message);
 //            cout << "New Paddle Message!" << endl;
         }
         
-        if (message.getArgAsString(0) == "/puckPos") {
+        if (message.getArgAsString(0) == "/ball/position") {
             //set puck posititon
             _Puck->mLoc.x = message.getArgAsFloat(1);
             _Puck->mLoc.y = message.getArgAsFloat(2);
@@ -94,7 +99,7 @@ void Pong_OSC_GuestApp::update()
     
     osc::Message message1;
     //    message1.setAddress("/paddlePos");
-    message1.addStringArg("/paddlePos");
+    message1.addStringArg("/player/position");
     message1.addFloatArg(myPaddle->getPos().y);
     sender.sendMessage(message1);
 //    console() << message1.getArgAsString(0) << endl;
